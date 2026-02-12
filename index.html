@@ -881,6 +881,8 @@
                 <p class="contact-intro">Have a question, opportunity, or just want to connect? Send me a message and I'll get back to you.</p>
                 <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
                     <input type="hidden" name="access_key" value="240242c4-6ec4-41d8-9208-c35dc05e3185">
+                    <!-- Honeypot: hidden from humans, bots will fill it -->
+                    <input type="text" name="website" style="display:none !important;" tabindex="-1" autocomplete="off">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required placeholder="Your name">
@@ -929,10 +931,28 @@
         // Contact form handler
         const form = document.getElementById('contactForm');
         const status = document.getElementById('formStatus');
+        let lastSubmitTime = 0;
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitBtn = form.querySelector('.form-submit');
+
+            // Honeypot check: if bot filled the hidden field, silently pretend success
+            if (form.querySelector('[name="website"]').value) {
+                status.textContent = 'Message sent successfully!';
+                status.className = 'form-status success';
+                form.reset();
+                return;
+            }
+
+            // Cooldown: block resubmission within 30 seconds
+            const now = Date.now();
+            if (now - lastSubmitTime < 30000) {
+                status.textContent = 'Please wait before sending another message.';
+                status.className = 'form-status error';
+                return;
+            }
+
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
             status.textContent = '';
@@ -940,6 +960,7 @@
 
             try {
                 const formData = new FormData(form);
+                formData.delete('website'); // Remove honeypot from submission
                 const json = Object.fromEntries(formData);
 
                 const response = await fetch(form.action, {
@@ -954,6 +975,7 @@
                 const result = await response.json();
 
                 if (result.success) {
+                    lastSubmitTime = Date.now();
                     status.textContent = 'Message sent successfully!';
                     status.className = 'form-status success';
                     form.reset();
