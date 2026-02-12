@@ -209,10 +209,12 @@
             color: var(--accent);
         }
 
-        .btn-coming-soon {
+        .btn-coming-soon-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
             cursor: default;
-            position: relative;
-            opacity: 0.85;
         }
 
         .coming-soon-badge {
@@ -224,8 +226,6 @@
             border-radius: 3px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-left: 0.35rem;
-            vertical-align: middle;
         }
 
         /* SECTIONS */
@@ -724,7 +724,10 @@
                 <a href="#contact" class="btn btn-primary">Get In Touch</a>
                 <a href="https://www.linkedin.com/in/giuseppegiuliano" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
                 <a href="https://github.com/Gzeppe" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
-                <span class="btn btn-outline btn-coming-soon">Portfolio <span class="coming-soon-badge">Coming Soon!</span></span>
+                <span class="btn-coming-soon-wrapper">
+                    <span class="coming-soon-badge">Coming Soon!</span>
+                    <span class="btn btn-outline">Portfolio</span>
+                </span>
             </div>
         </div>
     </section>
