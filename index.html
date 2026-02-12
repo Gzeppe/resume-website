@@ -879,7 +879,8 @@
             </div>
             <div class="contact-wrapper">
                 <p class="contact-intro">Have a question, opportunity, or just want to connect? Send me a message and I'll get back to you.</p>
-                <form class="contact-form" id="contactForm" action="https://formspree.io/f/{your-form-id}" method="POST">
+                <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="240242c4-6ec4-41d8-9208-c35dc05e3185">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required placeholder="Your name">
