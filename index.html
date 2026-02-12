@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giuseppe Giuliano | Application Engineer</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --accent: #00d4ff;
+            --accent-dim: rgba(0, 212, 255, 0.1);
+            --accent-glow: rgba(0, 212, 255, 0.3);
+            --text-primary: #e8e8f0;
+            --text-secondary: #9898a8;
+            --text-muted: #6a6a7a;
+            --border: #2a2a38;
+            --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 750px;
+            position: relative;
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-name {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-location {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin-top: 1rem;
+        }
+
+        /* ABOUT / SUMMARY */
+        #about {
+            background: var(--bg-secondary);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            line-height: 1.8;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-card-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--accent-dim);
+            color: var(--text-primary);
+            padding: 0.35rem 0.85rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+        }
+
+        /* EXPERIENCE */
+        #experience {
+            background: var(--bg-secondary);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-company {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.15rem;
+        }
+
+        .timeline-role {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-bullets {
+            list-style: none;
+        }
+
+        .timeline-bullets li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .timeline-bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.5;
+        }
+
+        .highlight {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: gap 0.3s;
+        }
+
+        .project-link:hover {
+            gap: 0.7rem;
+        }
+
+        .project-link .arrow {
+            transition: transform 0.3s;
+        }
+
+        .project-link:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        /* EDUCATION */
+        #education {
+            background: var(--bg-secondary);
+        }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+
+        .edu-school {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .edu-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-focus {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .edu-dates {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-top: 0.75rem;
+        }
+
+        /* CONTACT */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-intro {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            outline: none;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+        }
+
+        .form-submit {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: 2px solid var(--accent);
+            border-radius: 6px;
+            padding: 0.85rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font-main);
+            letter-spacing: 0.5px;
+        }
+
+        .form-submit:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .form-status {
+            text-align: center;
+            font-size: 0.9rem;
+            min-height: 1.5rem;
+        }
+
+        .form-status.success {
+            color: #00e676;
+        }
+
+        .form-status.error {
+            color: #ff5252;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            section {
+                padding: 3.5rem 1.25rem;
+            }
+
+            .hero {
+                padding: 5rem 1.25rem 3rem;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .edu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-logo">GG</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-label">Application Engineer</div>
+            <h1 class="hero-name">Giuseppe Giuliano</h1>
+            <p class="hero-title">7+ years delivering enterprise-scale software solutions in regulated environments</p>
+            <p class="hero-location">Resides in Connecticut</p>
+            <div class="hero-links">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="https://www.linkedin.com/in/giuseppegiuliano" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+                <a href="https://github.com/Gzeppe" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">// About</div>
+                <h2 class="section-title">Professional Summary</h2>
+                <div class="divider"></div>
+            </div>
+            <p class="about-text">
+                Application Engineer with 7+ years delivering enterprise-scale software solutions in regulated environments. Specializes in Python/Django, Java/Groovy, SQL, and cloud deployments, with proven results in system performance, reliability, and cross-functional team leadership. Ability to translate stakeholder requirements into reliable, compliant solutions that increase operational efficiency and measurable business outcomes.
+            </p>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">// Skills</div>
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-card-title">Cloud & DevOps</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">CI/CD Pipelines</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-title">Development</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Groovy</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-title">Tools & Analytics</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">SharePoint</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Bitbucket</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">// Experience</div>
+                <h2 class="section-title">Professional Experience</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="timeline">
+                <!-- Role 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-company">Envision Pharma Group</div>
+                    <div class="timeline-role">Application Analyst II</div>
+                    <div class="timeline-meta">Glastonbury, CT &mdash; Remote &nbsp;|&nbsp; Jul 2022 &ndash; Jul 2025</div>
+                    <ul class="timeline-bullets">
+                        <li>Designed, developed, and deployed enterprise-scale software solutions for regulated pharmaceutical clients, ensuring compliance, scalability, and reliability.</li>
+                        <li>Engineered Java, Groovy, and SQL solutions that <span class="highlight">increased system uptime and performance 20%</span> by optimizing memory management, caching, resource management, query management, and incorporating error handling.</li>
+                        <li>Responsible for translating complex business requirements into compliant software configurations, <span class="highlight">ensuring on-time delivery for 100+ client implementations</span>.</li>
+                        <li>Led and executed deployment upgrade plans, reducing downtime and accelerating adoption across 7 enterprise platforms.</li>
+                        <li>Partnered with Developers, Project Managers, Quality Assurance testers and Business Analysts to lead SCRUM-driven testing cycles, preventing post-release defects and safeguarding data integrity.</li>
+                        <li>Mentored junior analysts in software configuration and workflow automation, <span class="highlight">reducing onboarding time by 30%</span> and raising technical standards by fostering a knowledge sharing culture during workshops/trainings.</li>
+                    </ul>
+                </div>
+                <!-- Role 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-company">Envision Pharma Group</div>
+                    <div class="timeline-role">Application Analyst I</div>
+                    <div class="timeline-meta">Glastonbury, CT &nbsp;|&nbsp; Sep 2018 &ndash; Jul 2022</div>
+                    <ul class="timeline-bullets">
+                        <li>Oversaw end-to-end testing processes and consistently achieved <span class="highlight">zero critical post-release issues for 12+ consecutive months</span>.</li>
+                        <li>Documented detailed system specifications and process flows, improving deployment accuracy and cross-team collaboration.</li>
+                        <li>Provided reliable requirement gathering meetings with stakeholders, mapping business needs into backend specifications that met or exceeded client expectations.</li>
+                    </ul>
+                </div>
+                <!-- Role 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-company">Eastern Outfitters <span style="color:var(--text-muted);font-weight:400;font-size:0.9rem;">(EMS, Bob's Stores, Sports Chalet)</span></div>
+                    <div class="timeline-role">Front-End Web Developer</div>
+                    <div class="timeline-meta">Meriden, CT &nbsp;|&nbsp; Nov 2015 &ndash; Sep 2018</div>
+                    <ul class="timeline-bullets">
+                        <li>Built landing pages, email templates, and JavaScript product recommendation tools in Salesforce Commerce Cloud; implemented A/B testing and SEO optimizations driving <span class="highlight">3-12% seasonal conversion increases</span> and <span class="highlight">6% YoY organic traffic growth</span>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">// Projects</div>
+                <h2 class="section-title">Technical Projects</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-name">Workout Tracker</div>
+                    <div class="project-tech">Python, SQLite, CLI</div>
+                    <p class="project-desc">CLI-based workout tracking system with SQLite database for persistent storage, CRUD operations, and progress analytics. Demonstrates database design, Python OOP principles, and data validation best practices.</p>
+                    <a href="https://github.com/Gzeppe/workout-tracker" target="_blank" rel="noopener" class="project-link">View on GitHub <span class="arrow">&rarr;</span></a>
+                </div>
+                <div class="project-card">
+                    <div class="project-name">Backend Python Application</div>
+                    <div class="project-tech">Python, Django/Flask, Database Integration</div>
+                    <p class="project-desc">RESTful API with authentication, data persistence, and MVC architecture following scalable backend development practices. Implements server-side business logic separation and database optimization.</p>
+                    <a href="https://github.com/Gzeppe/backend-python" target="_blank" rel="noopener" class="project-link">View on GitHub <span class="arrow">&rarr;</span></a>
+                </div>
+                <div class="project-card">
+                    <div class="project-name">CSV Data Manager</div>
+                    <div class="project-tech">Python, Data Processing, CLI</div>
+                    <p class="project-desc">Python CLI tool for filtering, transforming, and exporting structured CSV data with batch processing capabilities. Enables data manipulation workflows for business intelligence and reporting at scale.</p>
+                    <a href="https://github.com/Gzeppe/CSV-Data-Manager" target="_blank" rel="noopener" class="project-link">View on GitHub <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">// Education</div>
+                <h2 class="section-title">Education</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="edu-grid">
+                <div class="edu-card">
+                    <div class="edu-school">Southern Connecticut State University</div>
+                    <div class="edu-location">New Haven, CT</div>
+                    <div class="edu-focus">Computer Science Coursework</div>
+                    <div class="edu-dates">Sep 2011 &ndash; May 2013</div>
+                </div>
+                <div class="edu-card">
+                    <div class="edu-school">Manchester Community College</div>
+                    <div class="edu-location">Manchester, CT</div>
+                    <div class="edu-focus">Graphic Design and Computer Science Coursework</div>
+                    <div class="edu-dates">Sep 2009 &ndash; May 2011</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header" style="text-align:center;">
+                <div class="section-label">// Contact</div>
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="divider" style="margin:1rem auto 0;"></div>
+            </div>
+            <div class="contact-wrapper">
+                <p class="contact-intro">Have a question, opportunity, or just want to connect? Send me a message and I'll get back to you.</p>
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/{your-form-id}" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required placeholder="What would you like to discuss?"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                    <div class="form-status" id="formStatus"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/giuseppegiuliano" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/Gzeppe" target="_blank" rel="noopener">GitHub</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p class="footer-copy">&copy; 2025 Giuseppe Giuliano. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Contact form handler
+        const form = document.getElementById('contactForm');
+        const status = document.getElementById('formStatus');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('.form-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            status.textContent = '';
+            status.className = 'form-status';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    status.textContent = 'Message sent successfully!';
+                    status.className = 'form-status success';
+                    form.reset();
+                } else {
+                    throw new Error('Failed to send');
+                }
+            } catch (err) {
+                status.textContent = 'Something went wrong. Please try again or reach out on LinkedIn.';
+                status.className = 'form-status error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+    </script>
+
+</body>
+</html>
