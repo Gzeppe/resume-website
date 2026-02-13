@@ -1,0 +1,467 @@
+/* Portfolio Hero */
+.portfolio-hero {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+}
+
+.portfolio-intro {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 1.5rem auto 0;
+    line-height: 1.8;
+}
+
+/* Portfolio Grid */
+.portfolio-section {
+    padding: 2rem 2rem 5rem;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.portfolio-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 4rem 0;
+}
+
+/* Portfolio Card */
+.portfolio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Card Carousel */
+.card-carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.card-carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.card-carousel-slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+.card-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+
+.card-carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--text-primary);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.card-carousel:hover .card-carousel-nav {
+    opacity: 1;
+}
+
+.card-carousel-prev { left: 8px; }
+.card-carousel-next { right: 8px; }
+
+.card-carousel-nav:hover {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+/* Carousel Dots */
+.card-carousel-dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+
+.card-carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s;
+}
+
+.card-carousel-dot.active {
+    background: var(--accent);
+}
+
+/* Card Body */
+.card-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.card-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.card-tag {
+    background: var(--accent-dim);
+    color: var(--text-primary);
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.card-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.card-link:hover {
+    opacity: 0.8;
+}
+
+.card-link-url {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    position: relative;
+}
+
+.card-link-domain {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+
+.card-link-hint {
+    font-size: 0.65rem;
+    font-weight: 400;
+    opacity: 0.6;
+    font-family: var(--font-mono);
+}
+
+.card-link-badge {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #ffb347;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.portfolio-card:hover .card-link-badge {
+    opacity: 1;
+}
+
+.card-view-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: auto;
+}
+
+.modal-url-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    align-self: center;
+}
+
+/* Modal */
+.portfolio-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.portfolio-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    max-width: 1000px;
+    width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 3;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--accent);
+}
+
+/* Modal Gallery */
+.modal-gallery {
+    position: relative;
+    width: 100%;
+    max-height: 60vh;
+    background: var(--bg-primary);
+    overflow: hidden;
+}
+
+.modal-image-wrapper {
+    width: 100%;
+    height: 100%;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-image {
+    width: 100%;
+    display: block;
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.modal-nav:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--accent);
+}
+
+.modal-prev { left: 12px; }
+.modal-next { right: 12px; }
+
+/* Modal Dots */
+.modal-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+}
+
+.modal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s;
+}
+
+.modal-dot.active {
+    background: var(--accent);
+}
+
+/* Modal Info */
+.modal-info {
+    padding: 1.5rem 2rem 2rem;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.modal-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.modal-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.modal-counter {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    z-index: 3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-hero {
+        padding: 6rem 1.25rem 2rem;
+    }
+
+    .modal-content {
+        width: 95vw;
+        max-height: 95vh;
+    }
+
+    .modal-info {
+        padding: 1rem 1.25rem 1.5rem;
+    }
+
+    .modal-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-hero {
+        padding: 5rem 1rem 1.5rem;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .modal-gallery {
+        max-height: 50vh;
+    }
+
+    .modal-image-wrapper {
+        max-height: 50vh;
+    }
+
+    .modal-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .modal-links .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Giuseppe Giuliano - Resume Website",
   "scripts": {
-    "start": "serve ."
+    "build": "node scripts/build-portfolio.js",
+    "start": "npm run build && serve .",
+    "dev": "serve ."
   },
   "dependencies": {
-    "serve": "^14.2.0"
+    "serve": "^14.2.0",
+    "sharp": "^0.33.0"
   }
 }

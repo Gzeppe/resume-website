@@ -179,14 +179,35 @@ nav {
 }
 
 .hero-name .wrapper:hover .letter {
-    transform: translateY(-50%);
-    color: var(--accent);
-    text-shadow: 0 0 1.5rem var(--accent-glow);
+    transform: translateY(-50%) !important;
+    color: var(--accent) !important;
+    text-shadow: 0 0 1.5rem var(--accent-glow) !important;
 }
 
 .hero-name .wrapper:hover .shadow {
-    opacity: 0;
-    transform: scaleY(-1) translateY(-50%);
+    opacity: 0 !important;
+    transform: scaleY(-1) translateY(-50%) !important;
+}
+
+/* Intro animation */
+@keyframes letterBounceIn {
+    0% { transform: translateY(-50%); color: var(--accent); text-shadow: 0 0 1.5rem var(--accent-glow); }
+    60% { transform: translateY(10%); }
+    100% { transform: translateY(0); color: var(--text-primary); text-shadow: none; }
+}
+
+@keyframes shadowFadeIn {
+    0% { opacity: 0; transform: scaleY(-1) translateY(-50%); }
+    60% { opacity: 0.3; transform: scaleY(-1) translateY(10%); }
+    100% { opacity: 0.25; transform: scaleY(-1); }
+}
+
+.hero-name .wrapper.intro .letter {
+    animation: letterBounceIn 0.5s ease-out forwards;
+}
+
+.hero-name .wrapper.intro .shadow {
+    animation: shadowFadeIn 0.5s ease-out forwards;
 }
 
 .hero-name .space {
@@ -250,27 +271,6 @@ nav {
     color: var(--accent);
 }
 
-.btn-coming-soon-wrapper {
-    position: relative;
-    display: inline-flex;
-    cursor: default;
-}
-
-.coming-soon-badge {
-    position: absolute;
-    top: -0.85rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ff3d71;
-    color: #fff;
-    font-size: 0.55rem;
-    font-weight: 700;
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-}
 
 /* SECTIONS */
 section {
@@ -732,11 +732,11 @@ footer {
     }
 
     .hero-name .wrapper:hover .letter {
-        transform: translateY(-30%);
+        transform: translateY(-30%) !important;
     }
 
     .hero-name .wrapper:hover .shadow {
-        transform: scaleY(-1) translateY(-30%);
+        transform: scaleY(-1) translateY(-30%) !important;
     }
 
     .hero-title {
@@ -828,14 +828,6 @@ footer {
         justify-content: center;
     }
 
-    .btn-coming-soon-wrapper {
-        width: 100%;
-    }
-
-    .btn-coming-soon-wrapper .btn {
-        width: 100%;
-        justify-content: center;
-    }
 
     section {
         padding: 2.5rem 1rem;
