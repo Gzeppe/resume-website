@@ -719,10 +719,50 @@ footer {
         padding: 5rem 1.25rem 3rem;
     }
 
+    .hero-name .wrapper {
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-top: 6px;
+    }
+
+    .hero-name .wrapper:hover .letter {
+        transform: translateY(-30%);
+    }
+
+    .hero-name .wrapper:hover .shadow {
+        transform: scaleY(-1) translateY(-30%);
+    }
+
+    .hero-title {
+        font-size: 1rem;
+    }
+
+    .hero-links {
+        gap: 0.75rem;
+    }
+
+    .btn {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
     .skills-grid,
-    .projects-grid,
     .edu-grid {
         grid-template-columns: 1fr;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-card,
+    .project-card,
+    .edu-card {
+        padding: 1.5rem;
     }
 
     .timeline {
@@ -731,5 +771,84 @@ footer {
 
     .timeline-item {
         padding-left: 1.25rem;
+    }
+
+    .timeline-bullets li {
+        font-size: 0.9rem;
+    }
+
+    .about-text {
+        font-size: 1rem;
+    }
+
+    .contact-intro {
+        font-size: 0.95rem;
+    }
+
+    .footer-links {
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 4.5rem 1rem 2.5rem;
+    }
+
+    .hero-name {
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
+    }
+
+    .hero-label {
+        font-size: 0.75rem;
+    }
+
+    .hero-title {
+        font-size: 0.9rem;
+    }
+
+    .hero-location {
+        font-size: 0.75rem;
+    }
+
+    .hero-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-coming-soon-wrapper {
+        width: 100%;
+    }
+
+    .btn-coming-soon-wrapper .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    section {
+        padding: 2.5rem 1rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .timeline-company {
+        font-size: 1rem;
+    }
+
+    .timeline-meta {
+        font-size: 0.8rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 0.75rem;
     }
 }
