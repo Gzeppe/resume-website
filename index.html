@@ -210,27 +210,25 @@
         }
 
         .btn-coming-soon-wrapper {
+            position: relative;
             display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.35rem;
             cursor: default;
         }
 
-        .btn-coming-soon-wrapper .btn {
-            width: 100%;
-            justify-content: center;
-        }
-
         .coming-soon-badge {
+            position: absolute;
+            top: -0.85rem;
+            left: 50%;
+            transform: translateX(-50%);
             background: #ff3d71;
             color: #fff;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 700;
-            padding: 0.15rem 0.45rem;
+            padding: 0.1rem 0.4rem;
             border-radius: 3px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
         /* SECTIONS */
