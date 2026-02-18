@@ -23,7 +23,7 @@
     var modalImageWrapper = document.querySelector('.modal-image-wrapper');
 
     /* ── Config ── */
-    var UPDATING_SITES = ['some-like-it-hot-power-yoga'];
+    var UPDATING_SITES = ['some-like-it-hot-power-yoga', 'innovativemsg'];
 
     /* ── Fetch & Render ── */
     fetch('projects.json')
