@@ -394,13 +394,13 @@
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', function () {
             hamburger.classList.toggle('active');
-            navLinks.classList.toggle('open');
+            navLinks.classList.toggle('active');
         });
 
         navLinks.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
                 hamburger.classList.remove('active');
-                navLinks.classList.remove('open');
+                navLinks.classList.remove('active');
             });
         });
     }
