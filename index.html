@@ -63,6 +63,13 @@
             <p class="about-text reveal" style="transition-delay:100ms">
                 Application Engineer with 7+ years delivering enterprise-scale software solutions in regulated environments. Specializes in Python/Django, Java/Groovy, SQL, and cloud deployments, with proven results in system performance, reliability, and cross-functional team leadership. Ability to translate stakeholder requirements into reliable, compliant solutions that increase operational efficiency and measurable business outcomes.
             </p>
+            <div style="display:flex;justify-content:center;margin-top:2.5rem;">
+                <button class="hero-scroll-btn" id="aboutScrollBtn" aria-label="Scroll to Experience section">
+                    <svg class="hero-scroll-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -302,6 +309,10 @@
         // Hero scroll-down button
         document.getElementById('heroScrollBtn').addEventListener('click', function () {
             document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('aboutScrollBtn').addEventListener('click', function () {
+            document.getElementById('experience').scrollIntoView({ behavior: 'smooth' });
         });
 
         // Mobile nav toggle
