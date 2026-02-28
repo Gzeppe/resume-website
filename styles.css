@@ -42,6 +42,7 @@
 
 html {
     scroll-behavior: smooth;
+    touch-action: pan-x pan-y;
 }
 
 body {
@@ -50,6 +51,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    touch-action: pan-x pan-y;
 }
 
 /* NAV */
@@ -662,7 +664,7 @@ section {
     padding: 0.85rem 1rem;
     color: var(--text-primary);
     font-family: var(--font-main);
-    font-size: 0.95rem;
+    font-size: 1rem;
     transition: border-color 0.3s;
     outline: none;
     resize: vertical;
@@ -836,6 +838,10 @@ footer {
 
     .timeline-bullets li {
         font-size: 0.9rem;
+    }
+
+    .hero-scroll-btn {
+        display: none;
     }
 
     .about-text {
