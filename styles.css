@@ -256,6 +256,40 @@ nav {
     flex-wrap: wrap;
 }
 
+.hero-scroll-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem auto 0;
+    background: none;
+    border: 2px solid rgba(0, 212, 255, 0.35);
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    cursor: pointer;
+    color: var(--accent);
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    animation: heroArrowBob 2s ease-in-out infinite;
+}
+
+.hero-scroll-btn:hover {
+    border-color: var(--accent);
+    background: rgba(0, 212, 255, 0.08);
+    animation-play-state: paused;
+    transform: translateY(4px);
+}
+
+.hero-scroll-arrow {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+@keyframes heroArrowBob {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(7px); }
+}
+
 .btn {
     display: inline-flex;
     align-items: center;

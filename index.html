@@ -36,7 +36,7 @@
             <div class="hero-name-wrapper">
                 <h1 class="hero-name" id="heroName"></h1>
             </div>
-            <p class="hero-title">7+ years delivering enterprise-scale software solutions in regulated environments</p>
+            <p class="hero-title">Modern full-stack engineer with 7+ years shipping end-to-end products, owning delivery across the SDLC and coordinating cross-functional dependencies and integrations</p>
             <p class="hero-location">Resides in Connecticut</p>
             <div class="hero-links">
                 <a href="#contact" class="btn btn-primary">Get In Touch</a>
@@ -44,6 +44,11 @@
                 <a href="https://github.com/Gzeppe" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
                 <a href="portfolio.html" class="btn btn-outline">Portfolio</a>
             </div>
+            <button class="hero-scroll-btn" id="heroScrollBtn" aria-label="Scroll to About section">
+                <svg class="hero-scroll-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
     </section>
 
@@ -58,49 +63,6 @@
             <p class="about-text reveal" style="transition-delay:100ms">
                 Application Engineer with 7+ years delivering enterprise-scale software solutions in regulated environments. Specializes in Python/Django, Java/Groovy, SQL, and cloud deployments, with proven results in system performance, reliability, and cross-functional team leadership. Ability to translate stakeholder requirements into reliable, compliant solutions that increase operational efficiency and measurable business outcomes.
             </p>
-        </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-label">// Skills</div>
-                <h2 class="section-title">Core Competencies</h2>
-                <div class="divider"></div>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card reveal" style="transition-delay:0ms">
-                    <div class="skill-card-title">Cloud & DevOps</div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">CI/CD Pipelines</span>
-                    </div>
-                </div>
-                <div class="skill-card reveal" style="transition-delay:100ms">
-                    <div class="skill-card-title">Development</div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Groovy</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                    </div>
-                </div>
-                <div class="skill-card reveal" style="transition-delay:200ms">
-                    <div class="skill-card-title">Tools & Analytics</div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Jira</span>
-                        <span class="skill-tag">SharePoint</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Bitbucket</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -177,6 +139,49 @@
                     <div class="project-tech">Python, Data Processing, CLI</div>
                     <p class="project-desc">Python CLI tool for filtering, transforming, and exporting structured CSV data with batch processing capabilities. Enables data manipulation workflows for business intelligence and reporting at scale.</p>
                     <a href="https://github.com/Gzeppe/CSV-Data-Manager" target="_blank" rel="noopener" class="project-link">View on GitHub <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">// Skills</div>
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card reveal" style="transition-delay:0ms">
+                    <div class="skill-card-title">Cloud & DevOps</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">CI/CD Pipelines</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal" style="transition-delay:100ms">
+                    <div class="skill-card-title">Development</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Groovy</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal" style="transition-delay:200ms">
+                    <div class="skill-card-title">Tools & Analytics</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">SharePoint</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Bitbucket</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -292,6 +297,11 @@
                     wrapper.classList.remove('intro');
                 }, 500);
             }, i * 100);
+        });
+
+        // Hero scroll-down button
+        document.getElementById('heroScrollBtn').addEventListener('click', function () {
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
         });
 
         // Mobile nav toggle
