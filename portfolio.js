@@ -31,7 +31,7 @@
             id: 'hatchnflies',
             name: 'Hatch N Flies',
             description: 'A Fly Fishing Ecommerce Website with admin dashboard for managing products.',
-            videoUrl: 'Portfolio/websites/hatchnflies/HatchnFlies1.mp4',
+            videoUrl: 'https://res.cloudinary.com/dvcvznyuf/video/upload/v1772659285/HatchnFlies1_lbuzhi.mp4',
             techStack: ['HTML', 'CSS', 'JavaScript'],
             liveUrl: null,
             githubUrl: null
