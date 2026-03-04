@@ -21,19 +21,35 @@
     var modalLinks = document.getElementById('modalLinks');
     var modalCounter = document.getElementById('modalCounter');
     var modalImageWrapper = document.querySelector('.modal-image-wrapper');
+    var modalVideo = document.getElementById('modalVideo');
 
     /* ── Config ── */
     var UPDATING_SITES = ['some-like-it-hot-power-yoga', 'innovativemsg'];
+
+    var VIDEO_PROJECTS = [
+        {
+            id: 'hatchnflies',
+            name: 'Hatch N Flies',
+            description: 'A Fly Fishing Ecommerce Website with admin dashboard for managing products.',
+            videoUrl: 'Portfolio/websites/hatchnflies/HatchnFlies1.mp4',
+            techStack: ['HTML', 'CSS', 'JavaScript'],
+            liveUrl: null,
+            githubUrl: null
+        }
+    ];
 
     /* ── Fetch & Render ── */
     fetch('projects.json')
         .then(function (r) { return r.json(); })
         .then(function (data) {
             projects = data;
+            grid.innerHTML = '';
+            renderVideoCards();
             renderGrid();
         })
         .catch(function () {
-            grid.innerHTML = '<div class="portfolio-loading">Failed to load projects.</div>';
+            grid.innerHTML = '';
+            renderVideoCards();
         });
 
     function formatUrl(url) {
@@ -41,8 +57,12 @@
     }
 
     function renderGrid() {
-        grid.innerHTML = '';
-        projects.forEach(function (project) {
+        var sorted = projects.slice().sort(function (a, b) {
+            if (a.id === 'gtech') return 1;
+            if (b.id === 'gtech') return -1;
+            return 0;
+        });
+        sorted.forEach(function (project) {
             var card = document.createElement('div');
             card.className = 'portfolio-card';
             card.setAttribute('role', 'button');
@@ -258,7 +278,138 @@
         });
     }
 
+    /* ── Video Cards ── */
+    function renderVideoCards() {
+        VIDEO_PROJECTS.forEach(function (project) {
+            var card = document.createElement('div');
+            card.className = 'portfolio-card';
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-label', 'View ' + project.name);
+
+            /* Video thumbnail */
+            var carousel = document.createElement('div');
+            carousel.className = 'card-carousel';
+
+            var video = document.createElement('video');
+            video.src = project.videoUrl;
+            video.autoplay = true;
+            video.muted = true;
+            video.loop = true;
+            video.setAttribute('playsinline', '');
+            video.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+            carousel.appendChild(video);
+            card.appendChild(carousel);
+
+            /* Card body */
+            var body = document.createElement('div');
+            body.className = 'card-body';
+
+            var title = document.createElement('h3');
+            title.className = 'card-title';
+            title.textContent = project.name;
+            body.appendChild(title);
+
+            if (project.description) {
+                var desc = document.createElement('p');
+                desc.className = 'card-desc';
+                desc.textContent = project.description;
+                body.appendChild(desc);
+            }
+
+            if (project.techStack && project.techStack.length > 0) {
+                var tags = document.createElement('div');
+                tags.className = 'card-tags';
+                project.techStack.forEach(function (tech) {
+                    var tag = document.createElement('span');
+                    tag.className = 'card-tag';
+                    tag.textContent = tech;
+                    tags.appendChild(tag);
+                });
+                body.appendChild(tags);
+            }
+
+            var footer = document.createElement('div');
+            footer.className = 'card-footer';
+
+            if (project.liveUrl) {
+                var liveLink = document.createElement('a');
+                liveLink.className = 'card-link card-link-url';
+                liveLink.href = project.liveUrl;
+                liveLink.target = '_blank';
+                liveLink.rel = 'noopener';
+                liveLink.addEventListener('click', function (e) { e.stopPropagation(); });
+                var urlText = document.createElement('span');
+                urlText.className = 'card-link-domain';
+                urlText.textContent = formatUrl(project.liveUrl);
+                liveLink.appendChild(urlText);
+                footer.appendChild(liveLink);
+            }
+
+            var viewLabel = document.createElement('span');
+            viewLabel.className = 'card-view-label';
+            viewLabel.textContent = 'video';
+            footer.appendChild(viewLabel);
+
+            body.appendChild(footer);
+            card.appendChild(body);
+
+            card.addEventListener('click', function () { openVideoModal(project); });
+            card.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openVideoModal(project);
+                }
+            });
+
+            grid.appendChild(card);
+        });
+    }
+
     /* ── Modal ── */
+    function openVideoModal(project) {
+        modalTitle.textContent = project.name;
+        modalDesc.textContent = project.description || '';
+        modalDesc.style.display = project.description ? '' : 'none';
+
+        modalTags.innerHTML = '';
+        if (project.techStack && project.techStack.length > 0) {
+            project.techStack.forEach(function (tech) {
+                var tag = document.createElement('span');
+                tag.className = 'card-tag';
+                tag.textContent = tech;
+                modalTags.appendChild(tag);
+            });
+        }
+
+        modalLinks.innerHTML = '';
+        if (project.liveUrl) {
+            var liveBtn = document.createElement('a');
+            liveBtn.className = 'btn';
+            liveBtn.href = project.liveUrl;
+            liveBtn.target = '_blank';
+            liveBtn.rel = 'noopener';
+            liveBtn.textContent = 'View Live Website';
+            modalLinks.appendChild(liveBtn);
+        }
+
+        /* Switch modal to video mode */
+        modalImage.style.display = 'none';
+        modalVideo.style.display = 'block';
+        modalVideo.src = project.videoUrl;
+        modalVideo.load();
+
+        /* Hide image navigation */
+        modalPrev.style.display = 'none';
+        modalNext.style.display = 'none';
+        modalDots.style.display = 'none';
+        modalCounter.style.display = 'none';
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
     function openModal(project, index) {
         modalProject = project;
         modalIndex = index;
@@ -342,6 +493,12 @@
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
         modalProject = null;
+
+        /* Reset video and restore image mode */
+        modalVideo.pause();
+        modalVideo.src = '';
+        modalVideo.style.display = 'none';
+        modalImage.style.display = '';
     }
 
     function modalGoTo(index) {

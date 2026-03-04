@@ -328,6 +328,13 @@
     display: block;
 }
 
+.modal-video {
+    width: 100%;
+    display: block;
+    max-height: 60vh;
+    background: #000;
+}
+
 .modal-nav {
     position: absolute;
     top: 50%;

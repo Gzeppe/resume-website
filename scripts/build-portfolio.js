@@ -10,13 +10,21 @@ const DISPLAY_WIDTH = 1400;
 const DISPLAY_QUALITY = 85;
 const CENTER_CROP_RATIO = 0.72; // Keep center 72% of width
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp'];
-const SKIP_FOLDERS = ['resume'];
+const SKIP_FOLDERS = ['resume', 'hatchnflies'];
 
 // Map folder names to their live URLs
 const LIVE_URLS = {
     'innovativemsg': 'https://innovativemsg.com/',
     'precise building and remodeling': 'http://www.precisebuildingremodeling.com/',
     'some like it hot power yoga': 'https://somelikeithotpoweryoga.com/'
+};
+
+// Map folder names to their descriptions
+const DESCRIPTIONS = {
+    'innovativemsg': 'A Live website built for Consultants that link customers seeking precision metal components to OEMs.',
+    'precise building and remodeling': 'A website built for a construction and remodeling company.',
+    'some like it hot power yoga': 'A website built for a Hot yoga studio in Hamden Connecticut.',
+    'gtech': 'My personal LLC for building websites for small businesses.'
 };
 
 function prettifyName(folderName) {
@@ -105,7 +113,7 @@ async function processProject(folderName) {
         id: folderName.toLowerCase().replace(/\s+/g, '-'),
         name: prettifyName(folderName),
         folder: folderName,
-        description: '',
+        description: DESCRIPTIONS[folderName] || '',
         techStack: [],
         liveUrl: LIVE_URLS[folderName] || '',
         githubUrl: '',
