@@ -1,0 +1,4 @@
+To push changes to railway for this project use:
+git add -A && git commit -m "your message" && git push origin main
+
+git add -A && git commit -m "updated wording" && git push origin main
