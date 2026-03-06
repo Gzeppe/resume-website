@@ -510,7 +510,7 @@ section {
 }
 
 .highlight {
-    color: var(--text-primary);
+    color: inherit;
 }
 
 /* PROJECTS */
